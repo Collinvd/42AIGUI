@@ -8,13 +8,10 @@ import java.awt.event.ActionListener;
 public class UI extends UIElement implements ActionListener {
 
     JFrame window = new JFrame();
-    JPanel panelSearch = new JPanel();
-    JPanel panelW = new JPanel();
-    JPanel panelS = new JPanel();
     UI(){
         window.setTitle("42GUI");
         window.setSize(800,600);
-        window.setResizable(false);
+        window.setResizable(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setVisible(true);
 
@@ -25,11 +22,17 @@ public class UI extends UIElement implements ActionListener {
 
         window.setLocation(x, y);
 
-        layoutPanelW = getLayoutPanel(150,100,darkGray);
-        layoutPanelC = getLayoutPanel(100,100,lightGray);
-        panelSearch = getLayoutPanel(100,100,gray);
+        layoutPanelW = getLayoutPanel(150,0,darkGray, new BorderLayout());
+        layoutPanelC = getLayoutPanel(100,100,lightGray,new BorderLayout());
+        promptPanel = getLayoutPanel(100,100,gray,null);
+        newChatButtonPanel = getLayoutPanel(0,40, darkGray, null);
+        chatPanel = getLayoutPanel(0, 0, gray, new FlowLayout(FlowLayout.CENTER, 1,1));
 
-        layoutPanelC.add(panelSearch, BorderLayout.SOUTH);
+        newChatButton = getNewChatButton(1,40,gray);
+        newChatButtonPanel.add(newChatButton, BorderLayout.CENTER);
+        layoutPanelW.add(newChatButtonPanel, BorderLayout.NORTH);
+        layoutPanelW.add(chatPanel, BorderLayout.CENTER);
+        layoutPanelC.add(promptPanel, BorderLayout.SOUTH);
         window.add(layoutPanelC, BorderLayout.CENTER);
         window.add(layoutPanelW, BorderLayout.WEST);
     }
