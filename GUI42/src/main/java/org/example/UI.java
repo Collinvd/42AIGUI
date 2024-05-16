@@ -42,6 +42,7 @@ public class UI extends UIElement implements ActionListener {
 
         //Sub Button Center
         sendButton = getSendButton(100,30,gray);
+        sendButton.addActionListener(this);
 
         //TextField Center
         promptBar = getPromptBar(1,1,new Color(50,50,50));
@@ -65,7 +66,6 @@ public class UI extends UIElement implements ActionListener {
         //==============================================================
         //==============================================================
         chatpanel.add(chat);
-        chatpanel.add(getChat());
         //Adding component to sub panels
         promptPanel.add(promptBar);
         promptPanel.add(sendButton);
@@ -82,14 +82,37 @@ public class UI extends UIElement implements ActionListener {
         window.setIconImage(logo.getImage());
         window.pack();
         window.setVisible(true);
+        System.out.println(chat.getPreferredSize());
+        chat.setMaximumSize(new Dimension(3000,chat.getPreferredSize().height));
+        chat.repaint();
+        chat.revalidate();
+        window.revalidate();
+        chatpanel.setPreferredSize(new Dimension(600,chat.getPreferredSize().height));
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==sendButton){
+            System.out.println("Hi");
+            response = getChat();
+            response.setText(promptBar.getText());
+            chatpanel.add(response);
+            window.revalidate();
+            response.setMaximumSize(new Dimension(3000,response.getPreferredSize().height));
+            response.repaint();
+            response.revalidate();
+            chatpanel.repaint();
+            chatpanel.revalidate();
+            window.revalidate();
+            System.out.println(chatpanel.getPreferredSize());
+        }
         if(e.getSource()==newChatButton){
             System.out.println(tabList.getPreferredSize());
             System.out.println(tabContainer.size());
             System.out.println(tabList.getComponentCount());
             System.out.println(chat.getMaximumSize());
+            System.out.println(chat.getSize());
+            System.out.println(chat.getPreferredSize());
+            chatpanel.setPreferredSize(new Dimension(600,2000));
             //=========================================================
             tabContainer.add(getLayoutPanel(180, 40, gray));
             tabContainer.get(tabContainer.size()-1).setLayout(new BoxLayout(tabContainer.get(tabContainer.size()-1), BoxLayout.X_AXIS));
@@ -106,6 +129,8 @@ public class UI extends UIElement implements ActionListener {
             tabList.add(Box.createRigidArea(new Dimension(0,6)));
             tabList.add(tabContainer.get(tabContainer.size()-1));
             tabList.repaint();
+            chatpanel.repaint();
+            chatpanel.revalidate();
             window.revalidate();
         }
         for(int x = 0; x < tabContainer.size();x++){

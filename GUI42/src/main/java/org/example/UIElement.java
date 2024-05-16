@@ -20,8 +20,11 @@ public class UIElement {
     JPanel newChatButtonPanel = new JPanel();
     JPanel tabList = new JPanel();
     JPanel chatpanel = new JPanel();
+    JPanel chatContainer = new JPanel();
     ArrayList<JPanel> tabContainer = new ArrayList<>();
     JPanel settings = new JPanel();
+    //LayeredPanel
+    JLayeredPane conversation = new JLayeredPane();
     //Scrollablepane
     JScrollPane tabPanel = new JScrollPane();
     JScrollPane dialogPanel = new JScrollPane();
@@ -33,6 +36,7 @@ public class UIElement {
     JButton tabRename = new JButton();
     //TextArea
     JTextArea chat = new JTextArea();
+    JTextArea response = new JTextArea();
     //TextField
     JTextField promptBar = new JTextField();
     //Images
@@ -120,12 +124,12 @@ public class UIElement {
     JTextArea getChat(){
         JTextArea text = new JTextArea();
         text.setBackground(darkGray);
-        text.setMaximumSize(new Dimension(6000,230));
+        text.setMaximumSize(new Dimension(6000,500));
         text.setEditable(false);
         text.setOpaque(true);
         text.setForeground(white);
         text.setFont(new Font("Calibri", Font.PLAIN,18));
-        text.setText("fdnfdjnfklsdnfjsandfjonsajkdnsajkdnasjkdnsjkandjsandkossssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssandoasndosnadkonsasfddfafsfajncijuasbfduhasbhjdbsahdbashuibshiabdhsbdisbdjibsuidbasijdbas");
+        text.setText("lorem\nlorem\nlorem\nlorem\nlorem\nlorem\nlorem\nlorem\nlorem\nlorem\nlorem\nlorem\nuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
         text.setLineWrap(true);
         return text;
     }
