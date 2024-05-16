@@ -34,12 +34,19 @@ public class UI extends UIElement implements ActionListener {
         Border border = BorderFactory.createEmptyBorder(0,40,0,40);
         promptPanel.setBorder(border);
         promptPanel.setLayout(new BoxLayout(promptPanel,BoxLayout.X_AXIS));
+        chatpanel = getLayoutPanel(600,100,gray);
+        chatpanel.setBorder(border);
+        chatpanel.setLayout(new BoxLayout(chatpanel,BoxLayout.Y_AXIS));
+        //Sub CHat
+        chat = getChat();
 
         //Sub Button Center
         sendButton = getSendButton(100,30,gray);
 
         //TextField Center
         promptBar = getPromptBar(1,1,new Color(50,50,50));
+        dialogPanel = new JScrollPane(chatpanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        dialogPanel.getVerticalScrollBar().setPreferredSize(new Dimension(10, 0));
         //==============================================================
         //==============================================================
         //Sub Panel West
@@ -57,6 +64,8 @@ public class UI extends UIElement implements ActionListener {
         newChatButtonPanel.add(newChatButton, BorderLayout.CENTER);
         //==============================================================
         //==============================================================
+        chatpanel.add(chat);
+        chatpanel.add(getChat());
         //Adding component to sub panels
         promptPanel.add(promptBar);
         promptPanel.add(sendButton);
@@ -64,6 +73,7 @@ public class UI extends UIElement implements ActionListener {
         layoutPanelW.add(newChatButtonPanel, BorderLayout.NORTH);
         layoutPanelW.add(tabPanel, BorderLayout.CENTER);
         layoutPanelW.add(settings, BorderLayout.SOUTH);
+        layoutPanelC.add(dialogPanel,BorderLayout.CENTER);
         layoutPanelC.add(promptPanel, BorderLayout.SOUTH);
         //Adding main panels to window
         window.add(layoutPanelC, BorderLayout.CENTER);
@@ -79,6 +89,7 @@ public class UI extends UIElement implements ActionListener {
             System.out.println(tabList.getPreferredSize());
             System.out.println(tabContainer.size());
             System.out.println(tabList.getComponentCount());
+            System.out.println(chat.getMaximumSize());
             //=========================================================
             tabContainer.add(getLayoutPanel(180, 40, gray));
             tabContainer.get(tabContainer.size()-1).setLayout(new BoxLayout(tabContainer.get(tabContainer.size()-1), BoxLayout.X_AXIS));

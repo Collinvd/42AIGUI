@@ -19,16 +19,20 @@ public class UIElement {
     JPanel promptPanel = new JPanel();
     JPanel newChatButtonPanel = new JPanel();
     JPanel tabList = new JPanel();
+    JPanel chatpanel = new JPanel();
     ArrayList<JPanel> tabContainer = new ArrayList<>();
     JPanel settings = new JPanel();
     //Scrollablepane
     JScrollPane tabPanel = new JScrollPane();
+    JScrollPane dialogPanel = new JScrollPane();
     //Buttons
     JButton newChatButton = new JButton();
     JButton sendButton = new JButton();
     JButton tab = new JButton();
     JButton tabRemove = new JButton();
     JButton tabRename = new JButton();
+    //TextArea
+    JTextArea chat = new JTextArea();
     //TextField
     JTextField promptBar = new JTextField();
     //Images
@@ -112,5 +116,17 @@ public class UIElement {
         button.setFocusPainted(false);
 
         return button;
+    }
+    JTextArea getChat(){
+        JTextArea text = new JTextArea();
+        text.setBackground(darkGray);
+        text.setMaximumSize(new Dimension(6000,230));
+        text.setEditable(false);
+        text.setOpaque(true);
+        text.setForeground(white);
+        text.setFont(new Font("Calibri", Font.PLAIN,18));
+        text.setText("fdnfdjnfklsdnfjsandfjonsajkdnsajkdnasjkdnsjkandjsandkossssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssandoasndosnadkonsasfddfafsfajncijuasbfduhasbhjdbsahdbashuibshiabdhsbdisbdjibsuidbasijdbas");
+        text.setLineWrap(true);
+        return text;
     }
 }
