@@ -5,6 +5,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentListener;
 import java.io.IOException;
 
 //Extending UIElement to gain access to components of the GUI(JFrame excluding)
@@ -30,16 +31,20 @@ public class UI extends UIElement implements ActionListener {
         //==============================================================
         //==============================================================
         //Sub Panel Center
+        history.add(new ChatHistory());
+        history.get(0).dialogs.add(new Dialog());
         promptPanel = getLayoutPanel(100,100,gray);
         Border border = BorderFactory.createEmptyBorder(0,40,0,40);
         promptPanel.setBorder(border);
         promptPanel.setLayout(new BoxLayout(promptPanel,BoxLayout.X_AXIS));
-        chatpanel = getLayoutPanel(600,100,gray);
-        chatpanel.setBorder(border);
+        chatpanel = getLayoutPanel(600,100,darkGray);
+        //chatpanel.setBorder(border);
         chatpanel.setLayout(new BoxLayout(chatpanel,BoxLayout.Y_AXIS));
         //Sub CHat
-        chat = getChat();
-
+//        chat = getChat();
+//        chatContainer = getLayoutPanel(600,100,gray);
+//        chatContainer.setBorder(getBorder(0,20,40,20,40,darkGray));
+        history.get(0).dialogs.get(0).userMessageContainer.setLayout(new BoxLayout(history.get(0).dialogs.get(0).userMessageContainer,BoxLayout.X_AXIS));
         //Sub Button Center
         sendButton = getSendButton(100,30,gray);
         sendButton.addActionListener(this);
@@ -65,7 +70,9 @@ public class UI extends UIElement implements ActionListener {
         newChatButtonPanel.add(newChatButton, BorderLayout.CENTER);
         //==============================================================
         //==============================================================
-        chatpanel.add(chat);
+        history.get(0).dialogs.get(0).userMessageContainer.add(history.get(0).dialogs.get(0).userMessage);
+        //chatContainer.add(chat);
+        chatpanel.add(history.get(0).dialogs.get(0).userMessageContainer);
         //Adding component to sub panels
         promptPanel.add(promptBar);
         promptPanel.add(sendButton);
@@ -82,36 +89,43 @@ public class UI extends UIElement implements ActionListener {
         window.setIconImage(logo.getImage());
         window.pack();
         window.setVisible(true);
-        System.out.println(chat.getPreferredSize());
-        chat.setMaximumSize(new Dimension(3000,chat.getPreferredSize().height));
-        chat.repaint();
-        chat.revalidate();
+        System.out.println(history.get(0).dialogs.get(0).userMessage.getPreferredSize());
+        history.get(0).dialogs.get(0).userMessage.setMaximumSize(new Dimension(3000,history.get(0).dialogs.get(0).userMessage.getPreferredSize().height));
+        history.get(0).dialogs.get(0).userMessage.repaint();
+        history.get(0).dialogs.get(0).userMessage.revalidate();
         window.revalidate();
-        chatpanel.setPreferredSize(new Dimension(600,chat.getPreferredSize().height));
+        chatpanel.setPreferredSize(new Dimension(600,history.get(0).dialogs.get(0).userMessage.getPreferredSize().height));
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==sendButton){
-            System.out.println("Hi");
-            response = getChat();
-            response.setText(promptBar.getText());
-            chatpanel.add(response);
+            //response = getChat();
+            history.get(0).dialogs.get(0).response.setText(promptBar.getText());
+            history.get(0).dialogs.get(0).assistantResponseContainer.add(history.get(0).dialogs.get(0).response);
+            chatpanel.add(history.get(0).dialogs.get(0).assistantResponseContainer);
+            chatpanel.repaint();
+            chatpanel.revalidate();
             window.revalidate();
-            response.setMaximumSize(new Dimension(3000,response.getPreferredSize().height));
-            response.repaint();
-            response.revalidate();
+            System.out.println(history.get(0).dialogs.get(0).response.getPreferredSize().height);
+            history.get(0).dialogs.get(0).response.setMaximumSize(new Dimension(3000,history.get(0).dialogs.get(0).response.getPreferredSize().height));
+            System.out.println(history.get(0).dialogs.get(0).response.getMaximumSize().height);
+            history.get(0).dialogs.get(0).response.repaint();
+            history.get(0).dialogs.get(0).response.revalidate();
+            history.get(0).dialogs.get(0).assistantResponseContainer.repaint();
+            history.get(0).dialogs.get(0).assistantResponseContainer.revalidate();
             chatpanel.repaint();
             chatpanel.revalidate();
             window.revalidate();
             System.out.println(chatpanel.getPreferredSize());
         }
         if(e.getSource()==newChatButton){
+            System.out.println(history.get(0).dialogs.get(0).userMessage.getSize());
             System.out.println(tabList.getPreferredSize());
             System.out.println(tabContainer.size());
             System.out.println(tabList.getComponentCount());
-            System.out.println(chat.getMaximumSize());
-            System.out.println(chat.getSize());
-            System.out.println(chat.getPreferredSize());
+            System.out.println(history.get(0).dialogs.get(0).userMessage.getMaximumSize());
+            System.out.println(history.get(0).dialogs.get(0).userMessage.getSize());
+            System.out.println(history.get(0).dialogs.get(0).userMessage.getPreferredSize());
             chatpanel.setPreferredSize(new Dimension(600,2000));
             //=========================================================
             tabContainer.add(getLayoutPanel(180, 40, gray));

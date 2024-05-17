@@ -13,6 +13,9 @@ public class UIElement {
 
     Toolkit toolkit = Toolkit.getDefaultToolkit();
     Dimension screenSize = toolkit.getScreenSize();
+
+    //Classes
+    ArrayList<ChatHistory> history = new ArrayList<>();
     //Layout panels
     JPanel layoutPanelW = new JPanel();
     JPanel layoutPanelC = new JPanel();
@@ -20,7 +23,7 @@ public class UIElement {
     JPanel newChatButtonPanel = new JPanel();
     JPanel tabList = new JPanel();
     JPanel chatpanel = new JPanel();
-    JPanel chatContainer = new JPanel();
+    //JPanel chatContainer = new JPanel();
     ArrayList<JPanel> tabContainer = new ArrayList<>();
     JPanel settings = new JPanel();
     //LayeredPanel
@@ -35,8 +38,8 @@ public class UIElement {
     JButton tabRemove = new JButton();
     JButton tabRename = new JButton();
     //TextArea
-    JTextArea chat = new JTextArea();
-    JTextArea response = new JTextArea();
+    //JTextArea chat = new JTextArea();
+    //JTextArea response = new JTextArea();
     //TextField
     JTextField promptBar = new JTextField();
     //Images
@@ -60,6 +63,7 @@ public class UIElement {
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(width,height));
         panel.setBackground(color);
+        panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
         return panel;
     }
     JPanel getLayoutPanel(int width, int height, Color color, LayoutManager layout, Color borderColor, int top ,int bottom, int left, int right){
@@ -121,16 +125,12 @@ public class UIElement {
 
         return button;
     }
-    JTextArea getChat(){
-        JTextArea text = new JTextArea();
-        text.setBackground(darkGray);
-        text.setMaximumSize(new Dimension(6000,500));
-        text.setEditable(false);
-        text.setOpaque(true);
-        text.setForeground(white);
-        text.setFont(new Font("Calibri", Font.PLAIN,18));
-        text.setText("lorem\nlorem\nlorem\nlorem\nlorem\nlorem\nlorem\nlorem\nlorem\nlorem\nlorem\nlorem\nuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
-        text.setLineWrap(true);
-        return text;
+    Border getBorder(int index,int top, int left, int bottom, int right, Color color){
+        if(index == 0){
+            return BorderFactory.createMatteBorder(top,left,bottom,right,color);
+        }
+        else{
+            return BorderFactory.createEmptyBorder(top,left,bottom,right);
+        }
     }
 }
